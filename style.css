@@ -1,0 +1,70 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    height: 100vh;
+}
+
+#game {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border: 2px solid #000;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#snake {
+    position: absolute;
+    background-color: green;
+    transition: all 0.1s;
+}
+
+#food {
+    position: absolute;
+    background-color: red;
+}
+
+#controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    grid-template-rows: repeat(3, 1fr); /* 3 linhas */
+    gap: 10px; /* Aumenta o espaço entre os botões */
+    margin-top: 20px; /* Aumenta a margem acima do controle */
+    width: 400px; /* Largura do quadro */
+    height: 200px; /* Altura do controle */
+}
+
+.control-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #000; /* Bordas dos botões */
+    cursor: pointer;
+    font-size: 24px;
+    padding: 20px; /* Aumenta o tamanho dos botões */
+}
+
+.control-button:hover {
+    background-color: #e0e0e0;
+}
+
+.count-display {
+    grid-column: 2; /* Centraliza na segunda coluna */
+    grid-row: 2; /* Centraliza na segunda linha */
+    font-size: 32px; /* Aumenta o tamanho da fonte */
+    background-color: #f0f0f0; /* Cor de fundo para o contador */
+    border: none; /* Remove a borda para não parecer um botão */
+}
+
+/* Posiciona os botões adequadamente */
+.control-button:nth-child(1) { grid-column: 2; grid-row: 1; } /* Cima */
+.control-button:nth-child(2) { grid-column: 1; grid-row: 2; } /* Esquerda */
+.control-button:nth-child(3) { grid-column: 2; grid-row: 2; } /* Centro (contador) */
+.control-button:nth-child(4) { grid-column: 3; grid-row: 2; } /* Direita */
+.control-button:nth-child(5) { grid-column: 2; grid-row: 3; } /* Baixo */
