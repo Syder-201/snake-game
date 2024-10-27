@@ -1,7 +1,7 @@
 const gameArea = document.getElementById('game');
 const snakeElement = document.getElementById('snake');
 const foodElement = document.getElementById('food');
-const gameCountElement = document.getElementById('gameCount');
+const scoreDisplay = document.getElementById('scoreDisplay');
 const gameSize = 400;
 const blockSize = 20;
 
@@ -11,7 +11,8 @@ let food = {
     x: Math.floor(Math.random() * (gameSize / blockSize)) * blockSize, 
     y: Math.floor(Math.random() * (gameSize / blockSize)) * blockSize 
 };
-let gameCount = 0; // Contador de jogos
+let score = 0; // Pontuação atual
+let highScore = 0; // Pontuação mais alta (recorde)
 
 function updateGame() {
     const newHead = { x: snake[0].x + direction.x * blockSize, y: snake[0].y + direction.y * blockSize };
@@ -27,12 +28,17 @@ function updateGame() {
 
     // Verifica se a cobrinha comeu a comida
     if (newHead.x === food.x && newHead.y === food.y) {
+        score++;
+        if (score > highScore) {
+            highScore = score; // Atualiza o recorde, se aplicável
+        }
         placeFood();
     } else {
         snake.pop(); // Remove a cauda
     }
 
     draw();
+    updateScoreDisplay();
 }
 
 function draw() {
@@ -75,9 +81,13 @@ function move(dir) {
 function resetGame() {
     snake = [{ x: 8 * blockSize, y: 8 * blockSize }];
     direction = { x: 0, y: 0 };
+    score = 0; // Reseta a pontuação atual
     placeFood();
-    gameCount++; // Incrementa o contador
-    gameCountElement.innerText = gameCount; // Atualiza a contagem de jogos
+    updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
+    scoreDisplay.innerText = `${score} / ${highScore}`; // Exibe a pontuação e o recorde
 }
 
 setInterval(updateGame, 100);
